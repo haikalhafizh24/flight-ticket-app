@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hai_air/ui/page/get_started_page.dart';
+import 'package:hai_air/ui/page/sign_up_page.dart';
 import 'package:hai_air/ui/page/splash_page.dart';
 
 // import 'ui/page/splash_page.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const SplashPage(),
         '/get-started' : (context) => const GetStartedPage(),
+        '/sign-up' : (context) =>const SignUpPage(),
       },
     );
   }
