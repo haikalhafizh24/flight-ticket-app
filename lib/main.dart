@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hai_air/ui/page/bonus_page.dart';
 import 'package:hai_air/ui/page/get_started_page.dart';
 import 'package:hai_air/ui/page/sign_up_page.dart';
 import 'package:hai_air/ui/page/splash_page.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const SplashPage(),
         '/get-started' : (context) => const GetStartedPage(),
         '/sign-up' : (context) =>const SignUpPage(),
+        '/bonus-page' : (context) => const BonusPage(),
       },
     );
   }
