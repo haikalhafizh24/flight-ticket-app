@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hai_air/ui/widgets/custom_button.dart';
 import '../../shared/theme.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -103,25 +104,9 @@ class SignUpPage extends StatelessWidget {
       }
 
       Widget signUpButton() {
-        return SizedBox(
-          width: double.infinity,
-          height: 55,
-          child: TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context,'/bonus-page');
-            },
-            style: TextButton.styleFrom(
-                backgroundColor: kPrimaryColor,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(defaultRadius))),
-            child: Text(
-              'Sign Up',
-              style: whiteTextStyle.copyWith(
-                fontSize: 18,
-              ),
-            ),
-          ),
-        );
+        return CustomButton(tittle: 'Sign UP', onPressed: () {
+          Navigator.pushNamed(context, '/bonus-page');
+        },);
       }
 
       Widget signInButton() {
