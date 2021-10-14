@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hai_air/ui/widgets/custom_button.dart';
+import 'package:hai_air/ui/widgets/custom_text_from_field.dart';
 import '../../shared/theme.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -19,94 +20,34 @@ class SignUpPage extends StatelessWidget {
 
     Widget inputSection() {
       Widget nameInput() {
-        return Container(
-          margin: const EdgeInsets.only(bottom: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Full Name",
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              TextFormField(
-                cursorColor: kBlackColor,
-                decoration: InputDecoration(
-                    hintText: 'Your Full Name',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(defaultRadius)),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(defaultRadius),
-                      borderSide: BorderSide(color: kPrimaryColor),
-                    )),
-              )
-            ],
-          ),
+        return const CustomTextFormField(
+          tittle: "Name",
+          hintText: "Your full name",
         );
       }
 
       Widget emailInput() {
-        return Container(
-          margin: const EdgeInsets.only(bottom: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Email Address",
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              TextFormField(
-                cursorColor: kBlackColor,
-                decoration: InputDecoration(
-                    hintText: 'Your email address',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(defaultRadius)),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(defaultRadius),
-                      borderSide: BorderSide(color: kPrimaryColor),
-                    )),
-              )
-            ],
-          ),
+        return const CustomTextFormField(
+          tittle: "Email",
+          hintText: "Your email address",
         );
       }
 
       Widget passwordInput() {
-        return Container(
-          margin: const EdgeInsets.only(bottom: 30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Password",
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              TextFormField(
-                obscureText: true,
-                cursorColor: kBlackColor,
-                decoration: InputDecoration(
-                    hintText: 'Your password',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(defaultRadius)),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(defaultRadius),
-                      borderSide: BorderSide(color: kPrimaryColor),
-                    )),
-              )
-            ],
-          ),
+        return const CustomTextFormField(
+          tittle: "Password",
+          hintText: "Your password",
+          obsecureText: true,
         );
       }
 
       Widget signUpButton() {
-        return CustomButton(tittle: 'Sign UP', onPressed: () {
-          Navigator.pushNamed(context, '/bonus-page');
-        },);
+        return CustomButton(
+          tittle: 'Sign UP',
+          onPressed: () {
+            Navigator.pushNamed(context, '/bonus-page');
+          },
+        );
       }
 
       Widget signInButton() {
@@ -122,7 +63,7 @@ class SignUpPage extends StatelessWidget {
                 TextButton(
                   onPressed: () {},
                   child: Text('Sign In',
-              style: primaryTextStyle.copyWith(fontSize: 16)),
+                      style: primaryTextStyle.copyWith(fontSize: 16)),
                 )
               ],
             ));
