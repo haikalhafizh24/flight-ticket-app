@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hai_air/shared/theme.dart';
+import 'package:hai_air/ui/page/checkout_page.dart';
 import 'package:hai_air/ui/widgets/custom_button.dart';
 import 'package:hai_air/ui/widgets/seat_item.dart';
 
@@ -370,11 +371,14 @@ class ChooseSeatPage extends StatelessWidget {
       return CustomButton(
         margin: const EdgeInsets.only(bottom: 46),
         tittle: 'Checkout',
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const CheckoutPage()));
+        },
       );
     }
 
     return Scaffold(
+      backgroundColor: kBackgroundColor,
       body: ListView(
         padding: const EdgeInsets.symmetric(
           horizontal: 24,
