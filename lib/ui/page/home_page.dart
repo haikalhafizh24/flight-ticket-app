@@ -152,7 +152,11 @@ class HomePage extends StatelessWidget {
     }
 
     return ListView(
-      children: [header(), popularDestination(), newDestination()],
+      children: [
+        header(),
+        popularDestination(),
+        newDestination(),
+      ],
     );
   }
 }
