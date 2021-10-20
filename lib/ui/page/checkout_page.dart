@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hai_air/shared/theme.dart';
+import 'package:hai_air/ui/page/succes_checkout_page.dart';
 import 'package:hai_air/ui/widgets/checkout_details_item.dart';
 import 'package:hai_air/ui/widgets/custom_button.dart';
 
@@ -250,7 +251,9 @@ class CheckoutPage extends StatelessWidget {
       return CustomButton(
         margin: const EdgeInsets.symmetric(vertical: 30),
         tittle: 'Pay Now',
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const SuccesCheckoutPage(),),);
+        },
       );
     }
 
