@@ -1,4 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hai_air/cubit/auth_cubit.dart';
+import 'package:hai_air/cubit/page_cubit.dart';
 import 'package:hai_air/ui/page/bonus_page.dart';
 import 'package:hai_air/ui/page/get_started_page.dart';
 import 'package:hai_air/ui/page/main_page.dart';
@@ -7,22 +11,36 @@ import 'package:hai_air/ui/page/splash_page.dart';
 
 // import 'ui/page/splash_page.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
-  const MyApp({ Key? key }) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( 
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/': (context) => const SplashPage(),
-        '/get-started' : (context) => const GetStartedPage(),
-        '/sign-up' : (context) =>const SignUpPage(),
-        '/bonus-page' : (context) => const BonusPage(),
-        '/main' : (context) =>  const MainPage(),
-      },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => PageCubit(),
+        ),
+        BlocProvider(
+          create: (context) => AuthCubit(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        routes: {
+          '/': (context) => const SplashPage(),
+          '/get-started': (context) => const GetStartedPage(),
+          '/sign-up': (context) => SignUpPage(),
+          '/bonus-page': (context) => const BonusPage(),
+          '/main': (context) => const MainPage(),
+        },
+      ),
     );
   }
 }

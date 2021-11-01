@@ -125,7 +125,7 @@ class _BonusPageState extends State<BonusPage> {
         top: 50,
       ),
       onPressed: () {
-        Navigator.pushNamed(context, '/main');
+        Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
       },
     );
   }

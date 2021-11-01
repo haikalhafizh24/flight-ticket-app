@@ -1,43 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:hai_air/cubit/page_cubit.dart';
 import '../../shared/theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomBottomNavigationIcon extends StatelessWidget {
-  
   final String imageUrl;
-  final bool isSelected;
-  
+  final int index;
+
   const CustomBottomNavigationIcon({
     Key? key,
     required this.imageUrl,
-    this.isSelected = false,
+    required this.index,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const SizedBox(),
-        Container(
-          height: 24,
-          width: 24,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                imageUrl
-              ),
+    return GestureDetector(
+      onTap: () {
+        context.read<PageCubit>().setPage(index);
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const SizedBox(),
+          Image.asset(
+            imageUrl,
+            width: 24,
+            height: 24,
+            color: context.read<PageCubit>().state == index
+                ? kPrimaryColor
+                : kGreyColor,
+          ),
+          Container(
+            width: 30,
+            height: 2,
+            decoration: BoxDecoration(
+              color: context.read<PageCubit>().state == index
+                  ? kPrimaryColor
+                  : kTransparentColor,
+              borderRadius: BorderRadius.circular(18),
             ),
           ),
-        ),
-        Container(
-          width: 30,
-          height: 2,
-          decoration: BoxDecoration(
-            color: isSelected ? kPrimaryColor : kTransparentColor,
-            borderRadius: BorderRadius.circular(18),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
