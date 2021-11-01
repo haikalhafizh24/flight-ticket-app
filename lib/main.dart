@@ -13,7 +13,7 @@ import 'package:hai_air/ui/page/splash_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

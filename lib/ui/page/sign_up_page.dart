@@ -10,8 +10,7 @@ class SignUpPage extends StatelessWidget {
 
   final TextEditingController nameController = TextEditingController(text: '');
   final TextEditingController emailController = TextEditingController(text: '');
-  final TextEditingController passwordController =
-      TextEditingController(text: '');
+  final TextEditingController passwordController = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
@@ -139,8 +138,7 @@ class SignUpPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      body: SafeArea(
-        child: ListView(
+      body: ListView(
           padding: EdgeInsets.symmetric(
             horizontal: defaultMargin,
           ),
@@ -150,7 +148,6 @@ class SignUpPage extends StatelessWidget {
             tacButton(),
           ],
         ),
-      ),
     );
   }
 }
