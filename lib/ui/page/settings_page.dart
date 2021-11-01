@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hai_air/cubit/auth_cubit.dart';
+import 'package:hai_air/cubit/page_cubit.dart';
 import 'package:hai_air/ui/widgets/custom_button.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -17,7 +19,8 @@ class SettingsPage extends StatelessWidget {
             ),
           );
         } else if(state is AuthInitial){
-          Navigator.pushNamedAndRemoveUntil(context, '/sign-up', (route) => false);
+          context.read<PageCubit>().setPage(0);
+          Navigator.pushNamedAndRemoveUntil(context, '/sign-in', (route) => false);
         }
       },
 

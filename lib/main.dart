@@ -6,6 +6,7 @@ import 'package:hai_air/cubit/page_cubit.dart';
 import 'package:hai_air/ui/page/bonus_page.dart';
 import 'package:hai_air/ui/page/get_started_page.dart';
 import 'package:hai_air/ui/page/main_page.dart';
+import 'package:hai_air/ui/page/sign_in_page.dart';
 import 'package:hai_air/ui/page/sign_up_page.dart';
 import 'package:hai_air/ui/page/splash_page.dart';
 
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => const SplashPage(),
           '/get-started': (context) => const GetStartedPage(),
           '/sign-up': (context) => SignUpPage(),
+          '/sign-in': (context) => SignInPage(),
           '/bonus-page': (context) => const BonusPage(),
           '/main': (context) => const MainPage(),
         },
