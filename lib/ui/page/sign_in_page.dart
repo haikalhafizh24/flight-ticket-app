@@ -9,7 +9,8 @@ class SignInPage extends StatelessWidget {
   SignInPage({Key? key}) : super(key: key);
 
   final TextEditingController emailController = TextEditingController(text: '');
-  final TextEditingController passwordController = TextEditingController(text: '');
+  final TextEditingController passwordController =
+      TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
@@ -91,39 +92,39 @@ class SignInPage extends StatelessWidget {
     }
 
     Widget signUpButton() {
-        return Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Don\'t have an account?',
-                  style: greyTextStyle.copyWith(fontSize: 16),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/sign-up');
-                  },
-                  child: Text('Sign Up',
-                      style: primaryTextStyle.copyWith(fontSize: 16)),
-                )
-              ],
-            ));
-      }
+      return Container(
+          margin: const EdgeInsets.only(top: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Don\'t have an account?',
+                style: greyTextStyle.copyWith(fontSize: 16),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/sign-up');
+                },
+                child: Text('Sign Up',
+                    style: primaryTextStyle.copyWith(fontSize: 16)),
+              )
+            ],
+          ));
+    }
 
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackgroundColor,
         body: ListView(
-            padding: EdgeInsets.symmetric(
-              horizontal: defaultMargin,
-            ),
-            children: [
-              title(),
-              inputSection(),
-              signUpButton(),
-            ],
+          padding: EdgeInsets.symmetric(
+            horizontal: defaultMargin,
           ),
+          children: [
+            title(),
+            inputSection(),
+            signUpButton(),
+          ],
+        ),
       ),
     );
   }

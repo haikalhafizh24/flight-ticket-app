@@ -10,6 +10,8 @@ import 'package:hai_air/ui/page/sign_in_page.dart';
 import 'package:hai_air/ui/page/sign_up_page.dart';
 import 'package:hai_air/ui/page/splash_page.dart';
 
+import 'cubit/destination_cubit.dart';
+
 // import 'ui/page/splash_page.dart';
 
 void main() async {
@@ -30,6 +32,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => AuthCubit(),
+        ),
+        BlocProvider(
+          create: (context) => DestinationCubit(),
         ),
       ],
       child: MaterialApp(

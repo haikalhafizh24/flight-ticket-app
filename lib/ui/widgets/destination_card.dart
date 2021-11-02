@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hai_air/models/destinations_model.dart';
 import 'package:hai_air/shared/theme.dart';
 import 'package:hai_air/ui/page/detail_page.dart';
 
 class DestinationCard extends StatelessWidget {
-  final String imageUrl;
-  final String name;
-  final String city;
-  final double rating;
+  final DestinationModel destination;
 
-  const DestinationCard({
+  const DestinationCard(
+    this.destination, {
     Key? key,
-    required this.imageUrl,
-    required this.name,
-    required this.city,
-    this.rating = 0.0,
   }) : super(key: key);
 
   @override
@@ -22,7 +17,7 @@ class DestinationCard extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const DetailPage()),
+          MaterialPageRoute(builder: (context) => DetailPage(destination)),
         );
       },
       child: Container(
@@ -45,8 +40,8 @@ class DestinationCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
                 image: DecorationImage(
-                  image: AssetImage(
-                    imageUrl,
+                  image: NetworkImage(
+                    destination.imageUrl,
                   ),
                 ),
               ),
@@ -74,7 +69,7 @@ class DestinationCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        rating.toString(),
+                        destination.rating.toString(),
                         style: blackTextStyle.copyWith(fontWeight: bold),
                       )
                     ],
@@ -88,13 +83,13 @@ class DestinationCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    destination.name,
                     style: blackTextStyle.copyWith(
                         fontSize: 18, fontWeight: medium),
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    city,
+                    destination.city,
                     style:
                         greyTextStyle.copyWith(fontSize: 14, fontWeight: light),
                   )

@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hai_air/models/destinations_model.dart';
 import 'package:hai_air/shared/theme.dart';
 import 'package:hai_air/ui/page/detail_page.dart';
 
 class DestinationTile extends StatelessWidget {
-  final String imageUrl;
-  final String name;
-  final String location;
-  final double rating;
+  final DestinationModel destinations;
 
-  const DestinationTile({
+  const DestinationTile(
+    this.destinations, {
     Key? key,
-    required this.imageUrl,
-    required this.name,
-    required this.location,
-    this.rating = 0.0,
   }) : super(key: key);
 
   @override
@@ -22,7 +17,7 @@ class DestinationTile extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const DetailPage()),
+          MaterialPageRoute(builder: (context) => DetailPage(destinations)),
         );
       },
       child: Container(
@@ -38,7 +33,8 @@ class DestinationTile extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
                 image: DecorationImage(
-                  image: AssetImage(imageUrl),
+                  fit: BoxFit.cover,
+                  image: NetworkImage(destinations.imageUrl),
                 ),
               ),
             ),
@@ -50,7 +46,7 @@ class DestinationTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    destinations.name,
                     style: blackTextStyle.copyWith(
                         fontSize: 18, fontWeight: medium),
                   ),
@@ -58,7 +54,7 @@ class DestinationTile extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    location,
+                    destinations.city,
                     style: greyTextStyle.copyWith(
                         fontSize: 14, fontWeight: medium),
                   ),
@@ -77,7 +73,7 @@ class DestinationTile extends StatelessWidget {
                           image: AssetImage('assets/Icon_Star.png'))),
                 ),
                 Text(
-                  rating.toString(),
+                  destinations.rating.toString(),
                   style: blackTextStyle.copyWith(fontWeight: medium),
                 )
               ],
