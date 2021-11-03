@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hai_air/cubit/seat_cubit.dart';
 import 'package:hai_air/models/destinations_model.dart';
+import 'package:hai_air/models/transaction_model.dart';
 import 'package:hai_air/shared/theme.dart';
 import 'package:hai_air/ui/page/checkout_page.dart';
 import 'package:hai_air/ui/widgets/custom_button.dart';
@@ -419,12 +420,34 @@ class ChooseSeatPage extends StatelessWidget {
     }
 
     Widget checkoutButton() {
-      return CustomButton(
-        margin: const EdgeInsets.only(bottom: 46),
-        tittle: 'Checkout',
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const CheckoutPage()));
+      return BlocBuilder<SeatCubit, List<String>>(
+        builder: (context, state) {
+          return CustomButton(
+            margin: const EdgeInsets.only(bottom: 46),
+            tittle: 'Checkout',
+            onPressed: () {
+
+                    int price = (destinations.price * state.length).toInt();
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CheckoutPage(
+                    TransactionModel(
+                      destination: destinations,
+                      amountOfTravelerl: state.length,
+                      selectedSeat:state.join(', '),
+                      insurance: true,
+                      vat: 0.08,
+                      refundable: false,
+                      price:price,
+                      grandTotal: price + (price * 0.08).toInt(),
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
         },
       );
     }
