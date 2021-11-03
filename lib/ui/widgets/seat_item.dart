@@ -1,47 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:hai_air/cubit/seat_cubit.dart';
 import 'package:hai_air/shared/theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SeatItem extends StatelessWidget {
-  final int status;
+  final bool isAvailable;
+  final String id;
 
   const SeatItem({
     Key? key,
-    required this.status,
+    required this.id,
+    this.isAvailable = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    bool isSelected = context.watch<SeatCubit>().isSelected(id);
+
     backgroundColor() {
-      switch (status) {
-        case 0:
-          return kAvailableColor;
-        case 1:
+      if(!isAvailable){
+        return kUnavailableColor;
+      } else {
+        if(isSelected) {
           return kPrimaryColor;
-        case 2:
+        } else {
           return kUnavailableColor;
-        default:
-          return kUnavailableColor;
+        }
       }
     }
 
     borderColor() {
-      switch (status) {
-        case 0:
-          return kPrimaryColor;
-        case 1:
-          return kPrimaryColor;
-        case 2:
-          return kUnavailableColor;
-        default:
-          return kUnavailableColor;
+      if(!isAvailable){
+        return kUnavailableColor;
+      } else {
+        return kPrimaryColor;
       }
     }
 
     child() {
-      switch (status) {
-        case 0:
-          return const SizedBox();
-        case 1:
+      if(isSelected){
           return Center(
             child: Text(
               'YOU',
@@ -51,25 +48,30 @@ class SeatItem extends StatelessWidget {
               ),
             ),
           );
-        case 2:
-          return const SizedBox();
-        default:
-          return const SizedBox();
+      } else{
+        return const SizedBox();
       }
     }
 
-    return Container(
-      height: 48,
-      width: 48,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(
-          width: 2,
-          color: borderColor(),
+    return GestureDetector(
+      onTap: (){
+        if(isAvailable) {
+          context.read<SeatCubit>().selectSeat(id);
+        }
+      },
+      child: Container(
+        height: 48,
+        width: 48,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(
+            width: 2,
+            color: borderColor(),
+          ),
+          color: backgroundColor(),
         ),
-        color: backgroundColor(),
+        child: child(),
       ),
-      child: child(),
     );
   }
 }
