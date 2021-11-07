@@ -1,9 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hai_air/cubit/auth_cubit.dart';
+import 'package:hai_air/cubit/transaction_cubit.dart';
 import 'package:hai_air/models/transaction_model.dart';
 import 'package:hai_air/shared/theme.dart';
-import 'package:hai_air/ui/page/succes_checkout_page.dart';
 import 'package:hai_air/ui/widgets/checkout_details_item.dart';
 import 'package:hai_air/ui/widgets/custom_button.dart';
 import 'package:intl/intl.dart';
@@ -25,7 +26,7 @@ class CheckoutPage extends StatelessWidget {
               height: 65,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(
+                  image: AssetImage(
                     'assets/Image_Checkout.png',
                   ),
                 ),
@@ -156,7 +157,7 @@ class CheckoutPage extends StatelessWidget {
             //NOTE: BOOKING DETAILS ITEMS
             CheckoutDetailsItem(
               tittle: 'Traveler',
-              detail: '${transactionModel.amountOfTravelerl} Person',
+              detail: '${transactionModel.amountOfTraveler} Person',
               style: blackTextStyle,
             ),
             CheckoutDetailsItem(
@@ -296,15 +297,33 @@ class CheckoutPage extends StatelessWidget {
     }
 
     Widget payButton() {
-      return CustomButton(
-        margin: const EdgeInsets.symmetric(vertical: 30),
-        tittle: 'Pay Now',
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const SuccesCheckoutPage(),
-            ),
+      return BlocConsumer<TransactionCubit, TransactionState>(
+        listener: (context, state) {
+          if (state is TransactionSucces) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, '/succes', (route) => false);
+          } else if (state is TransactionFailed) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.error),
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is TransactionLoading ){
+            return Container(
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(top:  30),
+              child: const CircularProgressIndicator(),
+            );
+          }
+          return CustomButton(
+            margin: const EdgeInsets.symmetric(vertical: 30),
+            tittle: 'Pay Now',
+            onPressed: () {
+              context.read<TransactionCubit>().createTransaction(transactionModel);
+            },
           );
         },
       );

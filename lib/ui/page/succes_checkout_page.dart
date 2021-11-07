@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hai_air/cubit/page_cubit.dart';
 import 'package:hai_air/shared/theme.dart';
 import 'package:hai_air/ui/widgets/custom_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SuccesCheckoutPage extends StatelessWidget {
   const SuccesCheckoutPage({Key? key}) : super(key: key);
@@ -54,6 +56,7 @@ class SuccesCheckoutPage extends StatelessWidget {
         tittle: 'My Booking',
         width: 220,
         onPressed: () {
+          context.read<PageCubit>().setPage(1);
           Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
         },
       );

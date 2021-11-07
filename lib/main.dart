@@ -4,13 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hai_air/cubit/auth_cubit.dart';
 import 'package:hai_air/cubit/page_cubit.dart';
 import 'package:hai_air/cubit/seat_cubit.dart';
+import 'package:hai_air/cubit/transaction_cubit.dart';
 import 'package:hai_air/ui/page/bonus_page.dart';
 import 'package:hai_air/ui/page/get_started_page.dart';
 import 'package:hai_air/ui/page/main_page.dart';
 import 'package:hai_air/ui/page/sign_in_page.dart';
 import 'package:hai_air/ui/page/sign_up_page.dart';
 import 'package:hai_air/ui/page/splash_page.dart';
-
+import 'package:hai_air/ui/page/succes_checkout_page.dart';
 import 'cubit/destination_cubit.dart';
 
 // import 'ui/page/splash_page.dart';
@@ -40,6 +41,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SeatCubit(),
         ),
+        BlocProvider(
+          create: (context) => TransactionCubit(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -50,6 +54,7 @@ class MyApp extends StatelessWidget {
           '/sign-in': (context) => SignInPage(),
           '/bonus-page': (context) => const BonusPage(),
           '/main': (context) => const MainPage(),
+          '/succes': (context) => const SuccesCheckoutPage(),
         },
       ),
     );
