@@ -110,7 +110,7 @@ class TransactionCard extends StatelessWidget {
             CheckoutDetailsItem(
               tittle: 'Refundable',
               detail: transaction.refundable ? 'YES' : 'NO',
-              style: transaction.insurance ? greenTextStyle : redTextStyle,
+              style: transaction.refundable ? greenTextStyle : redTextStyle,
             ),
             CheckoutDetailsItem(
               tittle: 'VAT',

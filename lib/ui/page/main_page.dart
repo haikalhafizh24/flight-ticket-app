@@ -42,7 +42,7 @@ class MainPage extends StatelessWidget {
             right: defaultMargin,
           ),
           decoration: BoxDecoration(
-            color: kWhiteColor,
+            color: kPrimaryColor,
             borderRadius: BorderRadius.circular(18),
           ),
           child: Row(

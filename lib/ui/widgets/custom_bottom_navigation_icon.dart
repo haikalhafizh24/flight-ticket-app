@@ -31,7 +31,7 @@ class CustomBottomNavigationIcon extends StatelessWidget {
             width: 24,
             height: 24,
             color: context.watch<PageCubit>().state == index
-                ? kPrimaryColor
+                ? kRedColor
                 : kGreyColor,
           ),
           Container(
@@ -39,7 +39,7 @@ class CustomBottomNavigationIcon extends StatelessWidget {
             height: 2,
             decoration: BoxDecoration(
               color: context.watch<PageCubit>().state == index
-                  ? kPrimaryColor
+                  ? kRedColor
                   : kTransparentColor,
               borderRadius: BorderRadius.circular(18),
             ),

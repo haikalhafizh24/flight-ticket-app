@@ -10,7 +10,7 @@ class UserService {
       _userReference.doc(user.id).set({
         'name': user.name,
         'email': user.email,
-        'balance': user.balancae,
+        'balance': user.balance,
       });
     } catch (e) {
       rethrow;
@@ -24,7 +24,7 @@ class UserService {
           id: id,
           email: snapshot['email'],
           name: snapshot['name'],
-          balancae: snapshot['balance']);
+          balance: snapshot['balance']);
     } catch (e) {
       rethrow;
     }

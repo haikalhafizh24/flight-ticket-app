@@ -173,7 +173,7 @@ class CheckoutPage extends StatelessWidget {
             CheckoutDetailsItem(
               tittle: 'Refundable',
               detail: transactionModel.refundable ? 'YES' : 'NO',
-              style: transactionModel.insurance ? greenTextStyle : redTextStyle,
+              style: transactionModel.refundable ? greenTextStyle : redTextStyle,
             ),
             CheckoutDetailsItem(
               tittle: 'VAT',
@@ -270,7 +270,7 @@ class CheckoutPage extends StatelessWidget {
                                 locale: 'id',
                                 symbol: 'IDR ',
                                 decimalDigits: 0,
-                              ).format(state.user.balancae),
+                              ).format(state.user.balance),
                               style: blackTextStyle.copyWith(
                                 fontSize: 18,
                                 fontWeight: medium,

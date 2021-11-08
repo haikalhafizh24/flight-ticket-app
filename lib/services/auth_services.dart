@@ -37,7 +37,7 @@ class AuthService {
         id: userCredential.user!.uid,
         email: email,
         name: name,
-        balancae: 340000000,
+        balance: 340000000,
       );
 
       await UserService().setUser(user);
