@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -25,6 +26,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    User? _user = FirebaseAuth.instance.currentUser;
+
     Widget header() {
       return BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
@@ -63,12 +66,15 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     height: 60,
                     width: 60,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                        image: AssetImage(
-                          "assets/image_profile.png",
+                        image: NetworkImage(
+                          '${_user!.photoURL}',
                         ),
+                        // AssetImage(
+                        //   "assets/image_profile.png",
+                        // ),
                       ),
                     ),
                   )

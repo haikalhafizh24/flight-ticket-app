@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hai_air/models/user_model.dart';
 import 'package:hai_air/services/user_service.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  // final GoogleSignIn googleSingIn = GoogleSignIn();
 
   Future<UserModel> signIn({
     required String email,
@@ -17,7 +19,32 @@ class AuthService {
           await UserService().getUserById(userCredential.user!.uid);
       return user;
     } catch (e) {
-      rethrow; 
+      rethrow;
+    }
+  }
+
+  Future<UserModel> signInGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
+
+      UserModel user =
+          await UserService().getUserGoogle(userCredential.user!.uid);
+      return user;
+    } catch (e) {
+      // ignore: avoid_print
+      // print(e);
+      rethrow;
     }
   }
 

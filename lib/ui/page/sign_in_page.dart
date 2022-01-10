@@ -74,6 +74,69 @@ class SignInPage extends StatelessWidget {
         );
       }
 
+      Widget signInGoogle() {
+        return BlocConsumer<AuthCubit, AuthState>(
+          listener: (context, state) {
+            if (state is AuthSucces) {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/main', (route) => false);
+            } else if (state is AuthFailed) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.error),
+                ),
+              );
+            }
+          },
+          builder: (context, state) {
+            // if (state is AuthLoading) {
+            //   return const Center(
+            //     child: CircularProgressIndicator(),
+            //   );
+            // }
+            return GestureDetector(
+              onTap: () {
+                context.read<AuthCubit>().signInGoogle();
+              },
+              child: Container(
+                margin: EdgeInsets.only(top: defaultMargin),
+                child: Column(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 55,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(defaultRadius),
+                        color: kPrimaryColor,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Sign In with Google Account',
+                            style: whiteTextStyle.copyWith(
+                                fontSize: 18, fontWeight: medium),
+                          ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Image.asset(
+                            'assets/google_icon.png',
+                            width: 30,
+                            height: 30,
+                            color: kWhiteColor,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      }
+
       return Container(
         margin: const EdgeInsets.only(top: 30),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
@@ -86,6 +149,7 @@ class SignInPage extends StatelessWidget {
             emailInput(),
             passwordInput(),
             signInButton(),
+            signInGoogle(),
           ],
         ),
       );

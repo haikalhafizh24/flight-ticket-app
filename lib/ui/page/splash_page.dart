@@ -16,15 +16,19 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     Timer(const Duration(seconds: 3), () {
-
       User? user = FirebaseAuth.instance.currentUser;
+      // ignore: avoid_print
+      // print(user?.uid);
 
       if (user == null) {
-        Navigator.pushNamedAndRemoveUntil(context, '/get-started', (route) => false);
-      } else {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/get-started', (route) => false);
+      } else if (user.displayName == '') {
         context.read<AuthCubit>().getCurrentUser(user.uid);
-        Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
+      } else {
+        context.read<AuthCubit>().getCurrentUserGoogle(user.uid);
       }
+      Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
     });
     super.initState();
   }
@@ -47,14 +51,12 @@ class _SplashPageState extends State<SplashPage> {
                 'assets/icon_plane.png',
               ))),
             ),
-            Text(
-              "AIRHAI",
-              style: whiteTextStyle.copyWith(
-                fontSize: 34,
-                fontWeight: medium,
-                letterSpacing: 11,
-              )
-            ),
+            Text("AIRHAI",
+                style: whiteTextStyle.copyWith(
+                  fontSize: 34,
+                  fontWeight: medium,
+                  letterSpacing: 11,
+                )),
           ],
         ),
       ),

@@ -20,7 +20,7 @@ class AuthSucces extends AuthState {
   List<Object> get props => [user];
 }
 
-class AuthFailed extends AuthState{
+class AuthFailed extends AuthState {
   final String error;
 
   const AuthFailed(this.error);
